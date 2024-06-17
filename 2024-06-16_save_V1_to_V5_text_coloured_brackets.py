@@ -48,7 +48,7 @@ def get_max_level(fset):
         return 0
 
     max_level = 0
-    stack = [(fset, 1)]  # (current_set, current_level)
+    stack = [(fset, int(1))]  # (current_set, current_level)
 
     while stack:
         current_set, current_level = stack.pop()

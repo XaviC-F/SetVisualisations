@@ -28,11 +28,11 @@ def powerset(fset):
     s = list(fset)
     return frozenset(frozenset(comb) for comb in itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s)+1)))
 
-def GenerateVStage(fset = frozenset(), count = 0):
+def GenerateVStage(count = 0, fset = frozenset()):
     if count == 0:
         return fset
     else:
-        return GenerateVStage(powerset(fset), count - 1)
+        return GenerateVStage(count - 1, powerset(fset))
 
 def get_max_level(fset):
     """Get the maximum nesting level of a frozenset."""
@@ -109,14 +109,11 @@ empty_set_sidelength = 20
 gap = (empty_set_sidelength)*2//5
 radius = 2
 
-       
-
 
 
 
 for i in range(5):
     draw.text((10,5*i*empty_set_sidelength+2),f"L{i}",font_size=25,fill=(0,0,0))
-    draw_sets_no_wrapping(GenerateVStage(fset=frozenset(),count=i), (50,5*i*empty_set_sidelength+5), gap, radius, 2)
+    draw_sets_no_wrapping(GenerateVStage(i), (50,5*i*empty_set_sidelength+5), gap, radius, 2)
 
 image.show()
-image.save("L0_to_L4.jpg")
